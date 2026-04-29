@@ -231,8 +231,11 @@ tbody tr:last-child td{border-bottom:none;}
   .mid-grid{grid-template-columns:1fr;}
 
   /* Bar chart: más pequeño */
-  .bar-chart{height:100px;}
-  .bar{width:8px;}
+  .chart-card{overflow:hidden;padding:14px;}
+  .bar-chart{height:72px;overflow:hidden;}
+  .bar-group{overflow:hidden;max-height:72px;}
+  .bars{max-height:60px;overflow:hidden;}
+  .bar{width:7px;}
   .bar-label{font-size:7px;}
   .bar-tooltip{display:none !important;}
 
@@ -255,9 +258,11 @@ tbody tr:last-child td{border-bottom:none;}
   .pres-section{padding:16px;}
 
   /* Annual balance */
-  .annual-row{grid-template-columns:55px 1fr 1fr 1fr;gap:4px;padding:10px 10px;}
-  .annual-ing,.annual-gas,.annual-bal,.annual-year{font-size:11px;}
-  .annual-col-hdr{font-size:8px;}
+  .annual-row{grid-template-columns:44px 1fr 1fr 1fr;gap:6px;padding:10px 8px;}
+  .annual-ing,.annual-gas,.annual-bal{font-size:11px !important;font-weight:600;}
+  .annual-year{font-size:12px !important;}
+  .annual-col-hdr{font-size:8px;letter-spacing:.5px;}
+  .annual-bar-wrap{display:none;}
 
   /* Top 10 */
   .report-card{padding:16px;}
@@ -614,8 +619,9 @@ function renderBarChart(){
     m.tipo==='ingreso'?data[k].i+= +m.monto:data[k].g+= +m.monto;
   });
   const maxV=Math.max(...MSS.map(k=>Math.max(data[k].i,data[k].g)),1);
+  const maxBarH=window.innerWidth<=768?58:148;
   document.getElementById('bar-chart').innerHTML=MSS.map(k=>{
-    const ih=Math.max(2,data[k].i/maxV*148),gh=Math.max(2,data[k].g/maxV*148);
+    const ih=Math.max(2,data[k].i/maxV*maxBarH),gh=Math.max(2,data[k].g/maxV*maxBarH);
     return`<div class="bar-group" style="opacity:${data[k].has?1:.2}">
       <div class="bar-tooltip">
         <div class="bar-tooltip-mes">${k} ${yr}</div>
