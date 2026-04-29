@@ -495,7 +495,7 @@ function applyPeriod(){
   const active=document.querySelector('.page-section:not([style*="none"])');
   if(active){
     if(active.id==='pg-categorias')renderCatPage(movs);
-    if(active.id==='pg-reportes')renderReportes(allMovs);
+    if(active.id==='pg-reportes')renderReportes(movs);
   }
 }
 
@@ -758,7 +758,7 @@ function navTo(page,el){
   document.getElementById('page-title').textContent=PAGE_TITLES[page]||'FinanzasPro';
   const movs=getPeriodMovs();
   if(page==='categorias')renderCatPage(movs);
-  if(page==='reportes')renderReportes(movs);
+  if(page==='reportes')renderReportes(getPeriodMovs());
   if(page==='presupuestos')renderPresupuestos();
   if(page==='movimientos'){movMovs=[...allMovs];renderMovTable();}
 }
